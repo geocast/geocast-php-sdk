@@ -35,6 +35,8 @@ class Geocast
 {
 	private $key;
 	private $webservice		= 'http://geocast.com.br/system/index.php/api/';
+	private $params			= array();
+	private $format			= 'json';
 	
 	public function __construct($key)
 	{
@@ -48,9 +50,34 @@ class Geocast
 	 * @return mixed
 	 * @author Geocast
 	 **/
-	public function api($method, $params=array())
+	public function api($method)
 	{
+		$curl = curl_init();
+		curl_setopt($curl, CURLOPT_URL, $this->webservice);
+		curl_setopt($curl, CURLOPT_POST, 1);
+		curl_setopt($curl, CURLOPT_POSTFIELDS, $this->get_data());
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 		
+		$xml = curl_exec($curl);
+		curl_close($curl);
+	}
+	
+	private function get_data()
+	{
+		$return =	'api=' . $this->key;
+		$return .=	'frm='
+		foreach ($params as $key => $param) {
+			$return .= $key . '=' . $param . '&'
+		}
+	}
+	
+	// gett e sett
+	public function set_params($params)
+	{
+		if (!is_array($params))
+			return;
+		
+		$this->params = $params;
 	}
 	
 } // END class
