@@ -1,0 +1,16 @@
+{
+    "name": "geocast/php-sdk",
+    "description": "Geocast SDK em PHP",
+    "keywords": ["geocast", "sdk"],
+    "type": "library",
+    "homepage": "https://github.com/geocast/geocast-php-sdk",
+    "license": "Apache2",
+    "require": {
+        "php": ">=5.2.0",
+        "ext-curl": "*",
+        "ext-json": "*"
+    },
+    "autoload": {
+        "classmap": ["geocast"]
+    }
+}
